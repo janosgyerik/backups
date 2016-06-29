@@ -38,4 +38,25 @@ require() {
     fi
 }
 
-# eof
+set_period_target() {
+    period=$1
+    name=$2
+    case "$period" in
+        daily)
+            # abbreviated weekday name
+            target=$local_backups_dir/daily/$name-$(date +%a).gz
+            ;;
+        weekly)
+            # day of month
+            target=$local_backups_dir/weekly/$name-$(date +%d).gz
+            ;;
+        monthly)
+            # abbreviated month name
+            target=$local_backups_dir/monthly/$name-$(date +%b).gz
+            ;;
+        *)
+            echo 'Error: unsupported period type: '$period >&2
+            exit 1
+            ;;
+    esac
+}

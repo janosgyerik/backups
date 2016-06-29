@@ -15,26 +15,7 @@ fi
 cd $(dirname $0)/..
 . ./common.sh
 
-filename=$name.dump
-
-case "$period" in
-    daily)
-        # abbreviated weekday filename
-        target=$local_backups_dir/daily/$filename-$(date +%a).gz
-        ;;
-    weekly)
-        # day of month
-        target=$local_backups_dir/weekly/$filename-$(date +%d).gz
-        ;;
-    monthly)
-        # abbreviated month filename
-        target=$local_backups_dir/monthly/$filename-$(date +%b).gz
-        ;;
-    *)
-    	echo 'Error: unsupported period type: '$period >&2
-        exit 1
-        ;;
-esac
+set_period_target $period $name.dump
 
 basedir=$(dirname "$target")
 mkdir -p $basedir
