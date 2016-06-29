@@ -1,7 +1,7 @@
 #!/bin/bash
 #
-# File: run.sh
-# Purpose: create and rotate backups
+# File: backup.sh
+# Purpose: create backups
 #
 
 usage() {
