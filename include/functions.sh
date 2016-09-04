@@ -40,19 +40,19 @@ require() {
 
 set_period_target() {
     period=$1
-    name=$2
+    dumpname=$2
     case "$period" in
         daily)
             # abbreviated weekday name
-            target=$local_backups_dir/daily/$name-$(date +%a).gz
+            target=$local_backups_dir/daily/$dumpname-$(date +%a).gz
             ;;
         weekly)
             # day of month
-            target=$local_backups_dir/weekly/$name-$(date +%d).gz
+            target=$local_backups_dir/weekly/$dumpname-$(date +%d).gz
             ;;
         monthly)
             # abbreviated month name
-            target=$local_backups_dir/monthly/$name-$(date +%b).gz
+            target=$local_backups_dir/monthly/$dumpname-$(date +%b).gz
             ;;
         *)
             echo 'Error: unsupported period type: '$period >&2
