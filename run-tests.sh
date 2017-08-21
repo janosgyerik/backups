@@ -24,8 +24,10 @@ msg() {
     echo "* $@"
 }
 
-for t in tests/* plugins/*/tests.sh; do
-    test -f "$t" || continue
-    msg running tests: $t ...
-    $t
+test $# -gt 0 || set -- tests/* plugins/*/tests.sh
+
+for testscript; do
+    test -f "$testscript" || continue
+    msg running tests: $testscript ...
+    $testscript
 done
