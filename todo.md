@@ -1,5 +1,13 @@
-todo
-----
+functionality
+-------------
+
+- create crontab configuration; per-plugin-config
+- remove crontab configuration
+- list crontab configurations
+- complete all TODO
+
+framework improvements
+----------------------
 
 - separate the configuration needed by the framework and custom configuration of the plugins, for example:
   - the framework needs just periods for now

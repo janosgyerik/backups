@@ -70,7 +70,9 @@ EOF
     mv "$path.bak" "$path"
 }
 
-rm_config() {
+remove_config() {
+    local plugin=$1
+    local name=$2
     rm -f "$CONF/$1/$2.sh"
 }
 

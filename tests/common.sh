@@ -20,7 +20,7 @@ matches "xoo name $all_periods" config xoo name
 #TODO
 #crontabs 4 xoo name
 fail add xoo name $all_periods  # name already exists
-ok rm xoo name
+ok remove xoo name
 #TODO
 #crontabs 0 xoo name
 
@@ -33,13 +33,13 @@ ok config xoo name
 #ok config
 fail config xoo name excess_arg
 fail config xoo nonexistent_name
-ok rm xoo name
+ok remove xoo name
 
-# rm
-fail rm xoo name
+# remove
+fail remove xoo name
 ok add xoo name $all_periods
-fail rm xoo name excess_arg
-ok rm xoo name
+fail remove xoo name excess_arg
+ok remove xoo name
 
 # run
 fail run nonexistent_plugin
@@ -56,7 +56,7 @@ ok run xoo name
 backups_exist xoo name $all_periods
 backups_clean xoo name
 
-ok rm xoo name
+ok remove xoo name
 
 #TODO list backups
 #list

@@ -10,7 +10,7 @@ cmd() {
 
     validate_no_more_args "$@"
 
-    rm_config $plugin $name
+    remove_config $plugin $name
     #TODO
     #rm_crontab $plugin $name
 }
