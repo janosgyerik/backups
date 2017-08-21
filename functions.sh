@@ -50,18 +50,19 @@ clear_config() {
     periods=
 }
 
-load_config() {
+get_config_path() {
     local plugin=$1
     local name=$2
+    echo "$CONF/$plugin/$name.sh"
+}
 
+load_config() {
     clear_config
-    . "$CONF/$plugin/$name.sh"
+    . "$(get_config_path "$@")"
 }
 
 write_config() {
-    local plugin=$1
-    local name=$2
-    local path=$CONF/$plugin/$name.sh
+    local path=$(get_config_path "$@")
 
     mkdir -p "${path%/*}"
     cat <<EOF >"$path.bak"
@@ -71,14 +72,13 @@ EOF
 }
 
 remove_config() {
-    local plugin=$1
-    local name=$2
-    rm -f "$CONF/$1/$2.sh"
+    rm "$(get_config_path "$@")"
 }
 
 load_plugin() {
+    local plugin=$1
     . ./plugins/base.sh
-    . ./plugins/$1/plugin.sh
+    . ./plugins/$plugin/plugin.sh
 }
 
 print_config() {
