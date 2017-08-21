@@ -1,47 +1,54 @@
 # run a backup configuration
 
-plugin=$1; shift
-validate_plugin $plugin
+main() {
+    local plugin=$1; shift
+    validate_plugin $plugin
 
-name=$1; shift
-validate_name $plugin "$name"
-validate_config_exists $plugin $name
+    local name=$1; shift
+    validate_name $plugin "$name"
+    validate_config_exists $plugin $name
 
-if test $# -gt 0; then
-    requested_periods=$1; shift
-    validate_periods "$requested_periods"
-else
-    requested_periods=
-fi
+    local active_periods
+    if test $# -gt 0; then
+        active_periods=$1; shift
+        validate_periods "$active_periods"
+    else
+        load_config $plugin $name
+        active_periods=$periods
+    fi
 
-validate_no_more_args "$@"
+    validate_no_more_args "$@"
 
-load_plugin $plugin
+    local workdir=$WORK
+    local outfile
+    local basename ext
+    local label
+    local backups_dir
 
-load_config $plugin $name
+    load_plugin $plugin
 
-test "$requested_periods" && periods=$requested_periods
+    for ((i = 0; i < ${#active_periods}; i++)); do
+        outfile=$(run $plugin $name "$workdir")
 
-workdir=$WORK
-for ((i = 0; i < ${#periods}; i++)); do
-    outfile=$(run $plugin $name "$workdir")
+        basename=${outfile%.*}
+        basename=${basename##*/}
+        ext=${outfile##*.}
+        test "$ext" || ext=bak
 
-    basename=${outfile%.*}
-    basename=${basename##*/}
-    ext=${outfile##*.}
-    test "$ext" || ext=bak
+        period=${active_periods:i:1}
+        case $period in
+            d) label=$(date +%a) ;;
+            w) label=$(date +%d) ;;
+            m) label=$(date +%b) ;;
+            h) label=$(date +%H) ;;
+            *) fatal "Unknown period: $period"
+        esac
 
-    period=${periods:i:1}
-    case $period in
-        d) label=$(date +%a) ;;
-        w) label=$(date +%d) ;;
-        m) label=$(date +%b) ;;
-        h) label=$(date +%H) ;;
-        *) fatal "Unknown period: $period"
-    esac
+        backups_dir=$(get_backups_dir $plugin $name $period)
+        mkdir -p "$backups_dir"
 
-    backups_dir=$(get_backups_dir $plugin $name $period)
-    mkdir -p "$backups_dir"
+        mv "$workdir/$outfile" "$backups_dir/$basename.$label.$ext"
+    done
+}
 
-    mv "$workdir/$outfile" "$backups_dir/$basename.$label.$ext"
-done
+main "$@"

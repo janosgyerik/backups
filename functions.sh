@@ -46,6 +46,24 @@ validate_no_more_args() {
     test $# = 0 || fatal "excess arguments: $@"
 }
 
+clear_config() {
+    periods=
+}
+
+load_config() {
+    clear_config
+    . "$CONF/$1/$2.sh"
+}
+
+write_config() {
+    local path=$CONF/$1/$2.sh
+    mkdir -p "${path%/*}"
+    cat <<EOF >"$path.bak"
+periods=$periods
+EOF
+    mv "$path.bak" "$path"
+}
+
 rm_config() {
     rm -f "$CONF/$1/$2.sh"
 }
@@ -59,7 +77,7 @@ print_config() {
     local plugin=$1
     local name=$2
     load_config $plugin $name
-    echo $plugin $name $periods $extras
+    echo $plugin $name $periods
 }
 
 add_crontab() {

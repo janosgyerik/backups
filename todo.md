@@ -1,3 +1,16 @@
+todo
+----
+
+- separate the configuration needed by the framework and custom configuration of the plugins, for example:
+  - the framework needs just periods for now
+  - the path plugin will need path
+  - the url plugin will need url
+  - plugins should have the ability (and responsibility) to load/write their own custom config, though the framework could provide helper functions
+  - the framework will provide WORK area where plugins can write whatever they want
+
+- store the periods in a more convenient format, for example space separated list of terms: daily weekly monthly hourly
+  - the input format could stay the same, for easy processing and compact writing
+
 scripts
 -------
 
