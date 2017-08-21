@@ -63,7 +63,6 @@ load_config() {
 
 write_config() {
     local path=$(get_config_path "$@")
-
     mkdir -p "${path%/*}"
     cat <<EOF >"$path.bak"
 periods=$periods
@@ -120,7 +119,7 @@ ok() {
 
 matches() {
     ((++tests_cnt))
-    expected=$1; shift
+    local expected=$1; shift
     local actual=$(run "$@")
     if [ "$expected" != "$actual" ]; then
         ((++failed_cnt))
