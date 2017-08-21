@@ -73,7 +73,7 @@ tests_cnt=0
 failed_cnt=0
 
 run() {
-    "$BACKUPS" "$@"
+    "$MAIN" "$@"
 }
 
 fail() {
@@ -100,6 +100,47 @@ matches() {
         ((++failed_cnt))
         echo "got '$actual', expected '$expected'"
     fi
+}
+
+backups_exist() {
+    local plugin=$1; shift
+    local name=$1; shift
+    local periods=$1; shift
+    local period backups_dir
+
+    for ((i = 0; i < ${#periods}; i++)); do
+        period=${periods:i:1}
+        backups_dir=$(get_backups_dir $plugin $name $period)
+        is_non_empty_dir "$backups_dir" || fatal "expected backups in $backups_dir"
+    done
+}
+
+backups_clean() {
+    local plugin=$1; shift
+    local name=$1; shift
+    local backups_dir=$(get_backups_dir $plugin $name d)
+    rm -fr "${backups_dir%/*}"
+}
+
+get_backups_dir() {
+    local plugin=$1; shift
+    local name=$1; shift
+    local period=$1; shift
+    local period_dir
+
+    case $period in
+        d) period_dir=daily ;;
+        w) period_dir=weekly ;;
+        m) period_dir=monthly ;;
+        h) period_dir=hourly ;;
+        *) fatal "Unknown period: $period"
+    esac
+
+    echo $BACKUPS/$plugin/$name/$period_dir
+}
+
+is_non_empty_dir() {
+    test "$(ls -A "$1")"
 }
 
 crontabs() {

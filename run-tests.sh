@@ -11,8 +11,12 @@ cleanup() {
 trap 'cleanup; exit' 0 1 2 3 15
 work=$(mktemp -d)
 
+export WORK=$work/work
 export CONF=$work/conf
-export BACKUPS=$PWD/backups.sh
+export BACKUPS=$work/backups
+mkdir -p "$WORK" "$CONF" "$BACKUPS"
+
+export MAIN=$PWD/backups.sh
 export CRONTAB=cat
 #crontab -l 2>/dev/null | sed -e "\?^$cron_unique_label\$?,/^\$/ d" | crontab -
 
