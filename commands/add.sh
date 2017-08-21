@@ -1,19 +1,23 @@
 # add a backup configuration
 
-plugin=$1; shift
-validate_plugin $plugin
+main() {
+    local plugin=$1; shift
+    validate_plugin $plugin
 
-name=$1; shift
-validate_name $plugin "$name"
-validate_config_nonexistent $plugin $name
+    local name=$1; shift
+    validate_name $plugin "$name"
+    validate_config_nonexistent $plugin $name
 
-periods=$1; shift
-validate_periods "$periods"
+    local periods=$1; shift
+    validate_periods "$periods"
 
-load_plugin $plugin
+    load_plugin $plugin
 
-validate_args $name "$@"
+    validate_args $name "$@"
 
-write_config $plugin $name
+    write_config $plugin $name
 
-add_crontab $plugin $name $periods
+    add_crontab $plugin $name $periods
+}
+
+main "$@"
