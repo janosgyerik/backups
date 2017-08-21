@@ -4,7 +4,7 @@ set -euo pipefail
 
 cd "$(dirname "$0")"
 
-. ./functions.sh
+. ./include/functions.sh
 
 # usage examples:
 # add mysql wp1 d

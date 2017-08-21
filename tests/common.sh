@@ -2,7 +2,8 @@
 
 set -euo pipefail
 
-. ./functions.sh
+. ./include/functions.sh
+. ./include/test-functions.sh
 
 all_periods=dwmh
 
