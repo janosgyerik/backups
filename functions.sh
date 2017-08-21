@@ -51,12 +51,18 @@ clear_config() {
 }
 
 load_config() {
+    local plugin=$1
+    local name=$2
+
     clear_config
-    . "$CONF/$1/$2.sh"
+    . "$CONF/$plugin/$name.sh"
 }
 
 write_config() {
-    local path=$CONF/$1/$2.sh
+    local plugin=$1
+    local name=$2
+    local path=$CONF/$plugin/$name.sh
+
     mkdir -p "${path%/*}"
     cat <<EOF >"$path.bak"
 periods=$periods
