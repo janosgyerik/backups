@@ -19,3 +19,4 @@ cmd=$1; shift
 validate_cmd "$cmd"
 
 . ./commands/$cmd.sh
+cmd "$@"

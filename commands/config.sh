@@ -13,7 +13,7 @@ print_configs() {
     fi
 }
 
-main() {
+cmd() {
     local plugin name
 
     if test $# -gt 0; then
@@ -36,5 +36,3 @@ main() {
         done
     fi
 }
-
-main "$@"

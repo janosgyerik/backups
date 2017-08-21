@@ -1,6 +1,6 @@
 # add a backup configuration
 
-main() {
+cmd() {
     local plugin=$1; shift
     validate_plugin $plugin
 
@@ -19,5 +19,3 @@ main() {
 
     add_crontab $plugin $name $periods
 }
-
-main "$@"

@@ -1,6 +1,6 @@
 # remove a backup configuration
 
-main() {
+cmd() {
     local plugin=$1; shift
     validate_plugin $plugin
 
@@ -14,5 +14,3 @@ main() {
     #TODO
     #rm_crontab $plugin $name
 }
-
-main "$@"

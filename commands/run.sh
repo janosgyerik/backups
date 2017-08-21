@@ -1,6 +1,6 @@
 # run a backup configuration
 
-main() {
+cmd() {
     local plugin=$1; shift
     validate_plugin $plugin
 
@@ -50,5 +50,3 @@ main() {
         mv "$workdir/$outfile" "$backups_dir/$basename.$label.$ext"
     done
 }
-
-main "$@"
