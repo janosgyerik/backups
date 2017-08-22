@@ -4,6 +4,8 @@ set -euo pipefail
 
 cd "$(dirname "$0")"
 
+. ./include/functions.sh
+
 cleanup() {
     test -d "$work" && rm -fr "$work"
 }
@@ -19,10 +21,6 @@ mkdir -p "$WORK" "$CONF" "$BACKUPS"
 export MAIN=$PWD/backups.sh
 export CRONTAB=cat
 #crontab -l 2>/dev/null | sed -e "\?^$cron_unique_label\$?,/^\$/ d" | crontab -
-
-msg() {
-    echo "* $@"
-}
 
 test $# -gt 0 || set -- tests/* plugins/*/tests.sh
 

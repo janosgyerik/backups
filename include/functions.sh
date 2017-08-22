@@ -1,3 +1,7 @@
+msg() {
+    echo "* $@"
+}
+
 fatal() {
     echo fatal: $*
     exit 1

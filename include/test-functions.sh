@@ -71,8 +71,8 @@ crontabs() {
 
 summary() {
     if test $failed_cnt = 0; then
-        echo ok: all $tests_cnt tests passed
+        msg ok: all $tests_cnt tests passed
     else
-        echo failed: $failed_cnt / $tests_cnt tests failed
+        msg failed: $failed_cnt / $tests_cnt tests failed
     fi
 }
