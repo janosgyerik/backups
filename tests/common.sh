@@ -12,7 +12,9 @@ fail  # no command
 fail nonexistent_command
 
 # add
+fail add   # missing plugin
 fail add nonexistent_plugin
+fail add xoo  # missing name
 fail add xoo 'nonexistent name'
 fail add xoo name x_nonexistent_periods
 fail add xoo name $all_periods excess_arg
