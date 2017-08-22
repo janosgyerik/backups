@@ -1,13 +1,23 @@
 tests_cnt=0
 failed_cnt=0
 
-run() {
+assert_equals() {
+    local expected=$1; shift
+    local actual=$1; shift
+    ((++tests_cnt))
+    if [ "$actual" != "$expected" ]; then
+        ((++failed_cnt))
+        echo "got $actual != $expected"
+    fi
+}
+
+run_main() {
     "$MAIN" "$@"
 }
 
 fail() {
     ((++tests_cnt))
-    if run "$@" &>/dev/null; then
+    if run_main "$@" &>/dev/null; then
         ((++failed_cnt))
         echo got success, expected fail: $@
     fi
@@ -15,7 +25,7 @@ fail() {
 
 ok() {
     ((++tests_cnt))
-    if ! run "$@" >/dev/null; then
+    if ! run_main "$@" >/dev/null; then
         ((++failed_cnt))
         echo got failure, expected success: $@
     fi
@@ -24,7 +34,7 @@ ok() {
 matches() {
     ((++tests_cnt))
     local expected=$1; shift
-    local actual=$(run "$@")
+    local actual=$(run_main "$@")
     if [ "$expected" != "$actual" ]; then
         ((++failed_cnt))
         echo "got '$actual', expected '$expected'"
