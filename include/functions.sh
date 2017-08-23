@@ -60,6 +60,12 @@ get_config_path() {
     echo "$CONF/$plugin/$name.sh"
 }
 
+get_plugin_args_path() {
+    local plugin=$1
+    local name=$2
+    echo "$CONF/$plugin/$name.sh.args"
+}
+
 load_config() {
     clear_config
     . "$(get_config_path "$@")"
@@ -72,6 +78,32 @@ write_config() {
 periods=$periods
 EOF
     mv "$path.bak" "$path"
+}
+
+write_plugin_args() {
+    local plugin=$1; shift
+    local name=$1; shift
+    test $# -gt 0 || return 0
+
+    local path=$(get_plugin_args_path $plugin $name)
+    local arg
+    for arg; do
+        echo "$arg"
+    done > "$path"
+}
+
+load_plugin_args() {
+    local plugin=$1; shift
+    local name=$1; shift
+
+    ARGS=()
+    local path=$(get_plugin_args_path $plugin $name)
+    test -f "$path" || return 0
+
+    local arg
+    while read -r arg; do
+        ARGS+=("$arg")
+    done <<< "$(cat "$path")"
 }
 
 remove_config() {
@@ -88,7 +120,8 @@ print_config() {
     local plugin=$1
     local name=$2
     load_config $plugin $name
-    echo $plugin $name $periods
+    load_plugin_args $plugin $name
+    echo $plugin $name $periods "${ARGS[@]}"
 }
 
 add_crontab() {
