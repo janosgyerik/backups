@@ -2,7 +2,7 @@
 
 cmd() {
     local plugin=$1; shift
-    validate_plugin $plugin
+    validate_plugin "$plugin"
 
     local name=$1; shift
     validate_name $plugin "$name"

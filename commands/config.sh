@@ -18,7 +18,7 @@ cmd() {
 
     if test $# -gt 0; then
         plugin=$1; shift
-        validate_plugin $plugin
+        validate_plugin "$plugin"
 
         if test $# -gt 0; then
             name=$1; shift
