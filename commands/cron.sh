@@ -1,18 +1,5 @@
 # run configurations of specified period
 
-get_plugins() {
-    ls -d plugins/*/ | cut -f2 -d/
-}
-
-get_configs() {
-    local plugin=$1; shift
-    local path=$CONF/$plugin
-
-    if test -d "$path"; then
-        find "$path" -type f | sed -e 's?.*/??' -e 's/\.sh$//'
-    fi
-}
-
 validate_periodname() {
     local name=$1
     case "$name" in

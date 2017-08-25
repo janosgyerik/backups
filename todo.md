@@ -1,10 +1,12 @@
 functionality
 -------------
 
-- create crontab configuration; per-plugin-config
-  - alternatively, use one configuration per period, and find all applicable configurations of all plugins
-- remove crontab configuration
-- list crontab configurations
+- list backups
+- write readme with usage examples
+- fix the fragilities of the cron command, harden with more tests
+- mysql plugin
+- create crontab installer and uninstaller
+  - sub-module the existing scripts, don't reinvent the wheel
 - complete all TODO
 
 framework improvements

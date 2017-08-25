@@ -145,3 +145,16 @@ get_backups_dir() {
 
     echo $BACKUPS/$plugin/$name/$period_dir
 }
+
+get_plugins() {
+    ls -d plugins/*/ | cut -f2 -d/
+}
+
+get_configs() {
+    local plugin=$1; shift
+    local path=$CONF/$plugin
+
+    if test -d "$path"; then
+        find "$path" -type f -name '*.sh' | sed -e 's?.*/??' -e 's/\.sh$//'
+    fi
+}

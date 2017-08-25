@@ -25,7 +25,12 @@ cmd() {
             validate_name $plugin "$name"
 
             validate_no_more_args "$@"
+        else
+            name=
         fi
+    else
+        plugin=
+        name=
     fi
 
     if test "$plugin"; then
