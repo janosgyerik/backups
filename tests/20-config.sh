@@ -7,6 +7,7 @@ set -euo pipefail
 
 ok config
 matches '' config
+matches '' config xoo
 
 fail config nonexistent_plugin
 fail config xoo nonexistent_config

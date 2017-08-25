@@ -1,5 +1,3 @@
-all_periods=dwmh
-
 tests_cnt=0
 failed_cnt=0
 

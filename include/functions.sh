@@ -1,3 +1,6 @@
+all_periods=dwmh
+all_periods_iterable='d w m h'
+
 msg() {
     echo "* $@"
 }

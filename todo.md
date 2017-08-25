@@ -1,7 +1,7 @@
 functionality
 -------------
 
-- list backups
+- fix main script, settings conf and backups dirs without breaking tests
 - write readme with usage examples
 - fix the fragilities of the cron command, harden with more tests
 - mysql plugin
