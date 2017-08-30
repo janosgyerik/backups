@@ -12,19 +12,23 @@ cleanup() {
 
 trap 'cleanup; exit' 0 1 2 3 15
 
-export MAIN=$PWD/backups.sh
 #crontab -l 2>/dev/null | sed -e "\?^$cron_unique_label\$?,/^\$/ d" | crontab -
 
 test $# -gt 0 || set -- tests/* plugins/*/tests.sh
+
+export MAIN=$PWD/backups.sh
+unset BACKUPS_PATH
 
 for testscript; do
     test -f "$testscript" || continue
 
     work=$(mktemp -d)
-    export WORK=$work/work
     export CONF=$work/conf
     export BACKUPS=$work/backups
-    mkdir -p "$WORK" "$CONF" "$BACKUPS"
+    mkdir -p "$CONF" "$BACKUPS"
+
+    export CONF_OVERRIDE=$CONF
+    export BACKUPS_PATH_OVERRIDE=$BACKUPS
 
     msg running tests: $testscript ...
     $testscript

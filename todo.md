@@ -1,7 +1,8 @@
 functionality
 -------------
 
-- fix main script, settings conf and backups dirs without breaking tests
+- fix all "unbound variable" errors, for example: ./backups.sh add
+  - need a systematic fix, there are too many possible occurrences
 - write readme with usage examples
 - fix the fragilities of the cron command, harden with more tests
 - mysql plugin
