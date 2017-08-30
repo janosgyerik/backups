@@ -9,6 +9,8 @@ run() {
     local name=$1; shift
     local workdir=$1; shift
 
+    validate_args $name "$@"
+
     local path
     for path; do
         filename=$(slugify "$path")
