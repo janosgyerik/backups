@@ -11,6 +11,4 @@ cmd() {
     validate_no_more_args "$@"
 
     remove_config $plugin $name
-    #TODO
-    #rm_crontab $plugin $name
 }
