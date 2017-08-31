@@ -127,11 +127,6 @@ print_config() {
     echo $plugin $name $periods "${ARGS[@]}"
 }
 
-add_crontab() {
-    # TODO
-    :
-}
-
 get_backups_dir() {
     local plugin=$1; shift
     local name=$1; shift

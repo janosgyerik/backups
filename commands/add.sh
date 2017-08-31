@@ -17,6 +17,4 @@ cmd() {
 
     write_config $plugin $name
     write_plugin_args $plugin $name "$@"
-
-    add_crontab $plugin $name $periods
 }
