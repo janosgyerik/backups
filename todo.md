@@ -5,6 +5,7 @@ functionality
   - need a systematic fix, there are too many possible occurrences
 - add proper tests with multiple arguments in xoo
 - add 'plugins' command so the interface is explorable
+- add tests for 'sysinfo' command
 - use a simple loop to parse `-h`, no need for the usual parameter array
   - and no need to make the -h depend on the command
 - write readme with usage examples
@@ -12,6 +13,7 @@ functionality
 - mysql plugin
 - create crontab installer and uninstaller
   - sub-module the existing scripts, don't reinvent the wheel
+- make failure in summary red color to stand out
 - complete all TODO
 
 framework improvements
