@@ -57,8 +57,8 @@ trap 'cleanup; exit' 0 1 2 3 15
 
 work=$(mktemp -d)
 
-export MAIN=$PWD/backups.sh
-export WORK=$work
+MAIN=$PWD/backups.sh
+WORK=$work
 
 if test "${CONF_OVERRIDE+x}"; then
     CONF=$CONF_OVERRIDE
@@ -71,6 +71,8 @@ if test "${BACKUPS_PATH_OVERRIDE+x}"; then
 elif test ! "${BACKUPS_PATH+x}"; then
     BACKUPS_PATH=$HOME/backups
 fi
+
+BACKUPS=$BACKUPS_PATH
 
 . ./commands/$cmd.sh
 cmd "$@"
