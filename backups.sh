@@ -17,7 +17,7 @@ cd "$(dirname "$0")"
 
 usage() {
     test $# = 0 || echo "$@"
-    echo "Usage: $0 CMD [CMD-ARGS]"
+    echo "Usage: $0 COMMAND [COMMAND-ARGS...]"
     echo
     echo A simple modular backup manager
     echo
@@ -27,7 +27,7 @@ usage() {
     echo
     echo Commands:
     echo
-    echo "  add PLUGIN NAME PERIODS"
+    echo "  add PLUGIN NAME PERIODS [ARGS...]"
     echo "  config [PLUGIN [NAME]]"
     echo "  cron [daily|weekly|month|hourly]"
     echo "  list [PLUGIN [NAME]]"
