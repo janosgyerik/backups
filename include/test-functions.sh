@@ -65,10 +65,6 @@ is_non_empty_dir() {
     test "$(ls -A "$1")"
 }
 
-crontabs() {
-    TODO
-}
-
 summary() {
     if test $failed_cnt = 0; then
         msg ok: all $tests_cnt tests passed
