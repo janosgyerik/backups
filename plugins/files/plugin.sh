@@ -1,5 +1,7 @@
 validate_args() {
+    require_arguments 1 "$@"
     local name=$1; shift
+
     test $# -gt 0 || fatal "got no more arguments; expected paths"
 }
 

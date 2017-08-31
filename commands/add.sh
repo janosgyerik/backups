@@ -1,15 +1,16 @@
 # add a backup configuration
 
 cmd() {
+    validate_plugin "$@"
     local plugin=$1; shift
-    validate_plugin "$plugin"
 
+    validate_name $plugin "$@"
     local name=$1; shift
-    validate_name $plugin "$name"
+
     validate_config_nonexistent $plugin $name
 
+    validate_periods "$@"
     local periods=$1; shift
-    validate_periods "$periods"
 
     load_plugin $plugin
 

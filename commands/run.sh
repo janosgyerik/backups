@@ -1,11 +1,12 @@
 # run a backup configuration
 
 cmd() {
+    validate_plugin "$@"
     local plugin=$1; shift
-    validate_plugin "$plugin"
 
+    validate_name $plugin "$@"
     local name=$1; shift
-    validate_name $plugin "$name"
+
     validate_config_exists $plugin $name
 
     local active_periods

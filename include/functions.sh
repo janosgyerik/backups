@@ -11,34 +11,38 @@ fatal() {
 }
 
 validate_cmd() {
+    test ${1+x} || fatal 'argument missing; expected command name'
     test "$1" || fatal 'invalid command: empty'
     local path=./commands/$1.sh
     test -f "$path" || fatal "no such command ($path)"
 }
 
 validate_plugin() {
+    test ${1+x} || fatal 'argument missing; expected plugin name'
     test "$1" || fatal 'invalid plugin: empty'
     local path=./plugins/$1/plugin.sh
     test -f "$path" || fatal "no such plugin ($path)"
 }
 
 validate_name() {
+    test ${1+x} || fatal 'argument missing; expected name'
     test "$1" || fatal 'invalid name: empty'
     [[ $1 =~ ^[a-zA-Z0-9_-]+$ ]] || fatal "invalid name: $1"
 }
 
 validate_config_nonexistent() {
     local name path=$CONF/$1/$2.sh
-    test ! -e "$path" || fatal "configuration '$1 $2' already exists"
+    test ! -e "$path" || fatal "configuration '$1 $2' already exists; expected not to"
 }
 
 validate_config_exists() {
     local name path=$CONF/$1/$2.sh
-    test -f "$path" || fatal "configuration '$1 $2' does not exist"
+    test -f "$path" || fatal "configuration '$1 $2' does not exist; expected to exist"
 }
 
 validate_periods() {
-    test "$1" || fatal 'invalid period: empty'
+    test ${1+x} || fatal 'argument missing; expected periods'
+    test "$1" || fatal 'invalid periods: empty'
     for ((i = 0; i < ${#1}; ++i)); do
         local period=${1:i:1}
         case $period in
@@ -51,6 +55,11 @@ validate_periods() {
 
 validate_no_more_args() {
     test $# = 0 || fatal "excess arguments: $@"
+}
+
+require_arguments() {
+    local count=$1; shift
+    test $# -ge $count || fatal "got $# arguments; expected $count"
 }
 
 clear_config() {

@@ -20,8 +20,8 @@ get_period() {
 }
 
 cmd() {
+    validate_periodname "$@"
     local periodname=$1; shift
-    validate_periodname "$periodname"
 
     validate_no_more_args "$@"
 

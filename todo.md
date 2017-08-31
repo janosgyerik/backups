@@ -1,16 +1,18 @@
+first release
+-------------
+
+- add proper tests with multiple arguments in xoo
+- write readme with usage examples
+- create crontab installer and uninstaller
+  - sub-module the existing scripts, don't reinvent the wheel
+
 functionality
 -------------
 
-- fix all "unbound variable" errors, for example: ./backups.sh add
-  - need a systematic fix, there are too many possible occurrences
-- add proper tests with multiple arguments in xoo
 - add 'plugins' command so the interface is explorable
 - add tests for 'sysinfo' command
-- write readme with usage examples
 - fix the fragilities of the cron command, harden with more tests
 - mysql plugin
-- create crontab installer and uninstaller
-  - sub-module the existing scripts, don't reinvent the wheel
 - make failure in summary red color to stand out
 - complete all TODO
 
