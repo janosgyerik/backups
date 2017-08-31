@@ -37,23 +37,12 @@ usage() {
     exit 1
 }
 
-args=
-#flag=off
-#param=
-while test $# != 0; do
-    case $1 in
-    -h|--help) usage ;;
-#    -f|--flag) flag=on ;;
-#    --no-flag) flag=off ;;
-#    -p|--param) shift; param=$1 ;;
-#    --) shift; while test $# != 0; do args="$args \"$1\""; shift; done; break ;;
-    -|-?*) usage "Unknown option: $1" ;;
-    *) args="$args \"$1\"" ;;  # script that takes multiple arguments
+for arg; do
+    case "$arg" in
+        -h|--help) usage ;;
+        '') fatal empty argument, probably an error ;;
     esac
-    shift
 done
-
-eval "set -- $args"  # save arguments in $@. Use "$@" in for loops, not $@ 
 
 test $# -gt 0 || usage
 
