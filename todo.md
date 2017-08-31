@@ -3,6 +3,10 @@ functionality
 
 - fix all "unbound variable" errors, for example: ./backups.sh add
   - need a systematic fix, there are too many possible occurrences
+- add proper tests with multiple arguments in xoo
+- add 'plugins' command so the interface is explorable
+- use a simple loop to parse `-h`, no need for the usual parameter array
+  - and no need to make the -h depend on the command
 - write readme with usage examples
 - fix the fragilities of the cron command, harden with more tests
 - mysql plugin
