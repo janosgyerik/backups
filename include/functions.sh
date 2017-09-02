@@ -18,21 +18,21 @@ fatal() {
 
 validate_cmd() {
     test ${1+x} || fatal 'argument missing; expected command name'
-    test "$1" || fatal 'invalid command: empty'
+    test "$1" || fatal 'invalid command: <empty>'
     local path=./commands/$1.sh
     test -f "$path" || fatal "no such command ($path)"
 }
 
 validate_plugin() {
     test ${1+x} || fatal 'argument missing; expected plugin name'
-    test "$1" || fatal 'invalid plugin: empty'
+    test "$1" || fatal 'invalid plugin: <empty>'
     local path=./plugins/$1/plugin.sh
     test -f "$path" || fatal "no such plugin ($path)"
 }
 
 validate_name() {
     test ${1+x} || fatal 'argument missing; expected name'
-    test "$1" || fatal 'invalid name: empty'
+    test "$1" || fatal 'invalid name: <empty>'
     [[ $1 =~ ^[a-zA-Z0-9_-]+$ ]] || fatal "invalid name: $1"
 }
 
@@ -48,7 +48,7 @@ validate_config_exists() {
 
 validate_periods() {
     test ${1+x} || { errmsg 'argument missing; expected periods'; return 1; }
-    test "$1" || { errmsg invalid periods: empty; return 1; }
+    test "$1" || { errmsg 'invalid periods: <empty>'; return 1; }
     local d=0 w=0 m=0 h=0
     for ((i = 0; i < ${#1}; ++i)); do
         local period=${1:i:1}
