@@ -7,9 +7,8 @@ print_backups_plugin_name_period() {
     local backups_dir
 
     backups_dir=$(get_backups_dir $plugin $name $period)
-    # TODO fragile
     if test -d "$backups_dir"; then
-        find "$backups_dir" -type f | sed -e "s?^$BACKUPS_PATH/??"
+        find "$backups_dir" -type f
     fi
 }
 
