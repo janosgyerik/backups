@@ -1,7 +1,6 @@
 first release
 -------------
 
-- make the cron command print what it is doing: date, args, config
 - manual test all supported plugins
 
 functionality

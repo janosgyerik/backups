@@ -5,6 +5,10 @@ msg() {
     echo "* $@"
 }
 
+log() {
+    echo "* $(date '+%F %H:%m:%S') - $@"
+}
+
 errmsg() {
     local bold_red='\033[1;31m'
     local reset='\033[0m'

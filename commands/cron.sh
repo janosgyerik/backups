@@ -28,13 +28,22 @@ cmd() {
 
     local period=$(get_period $periodname)
 
+    _log() {
+        log cron $periodname "$@"
+    }
+    _log start
+
     local plugin config
     for plugin in $(get_plugins); do
         for config in $(get_configs $plugin); do
             load_config $plugin $config
             if [[ $periods == *$period* ]]; then
+                _log $plugin $config start
                 $MAIN run $plugin $config
+                _log $plugin $config end
             fi
         done
     done
+
+    _log end
 }
