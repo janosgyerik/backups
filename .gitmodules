@@ -1,0 +1,3 @@
+[submodule "crontab-installer"]
+	path = crontab-installer
+	url = https://github.com/janosgyerik/crontab-installer

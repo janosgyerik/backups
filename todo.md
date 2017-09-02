@@ -1,22 +1,25 @@
 first release
 -------------
 
-- create crontab installer and uninstaller: install.sh
-  - sub-module the existing scripts, don't reinvent the wheel
-- add proper tests with multiple arguments in xoo
+- make failure in summary red color to stand out
+- make the cron command print what it is doing: date, args, config
+- rename files plugin to paths, and make it tgz instead of copy
 - manual test all supported plugins
 - drop the TODO from the README, and make sure it all works as advertised
+- make failure in summary red color to stand out
 
 functionality
 -------------
 
-- add plugin help, triggered by -h appearing anywhere after plugin name; this is important, because it's not obvious what kind of parameters are required by mysql and files plugins
-- add 'plugins' command so the interface is explorable
-- add tests for 'sysinfo' command
-- fix the fragilities of the cron command, harden with more tests
-- make failure in summary red color to stand out
 - complete all TODO
-- add logging
+- add plugin help, triggered by -h appearing anywhere after plugin name; this is important, because it's not obvious what kind of parameters are required by mysql and files plugins
+- fix the fragilities of the cron command, harden with more tests
+- add 'plugins' command so the interface is explorable
+- add -lh flags for list command
+- add tests for 'sysinfo' command
+- add logging for cron command
+  - update the crontab to redirect cron command output to logs/daily.log
+- add proper tests with multiple arguments in xoo
 
 framework improvements
 ----------------------
