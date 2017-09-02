@@ -24,10 +24,10 @@ validate_cmd() {
 }
 
 validate_plugin() {
-    test ${1+x} || fatal 'argument missing; expected plugin name'
-    test "$1" || fatal 'invalid plugin: <empty>'
+    test ${1+x} || { errmsg 'argument missing; expected plugin name'; return 1; }
+    test "$1" || { errmsg 'invalid plugin: <empty>'; return 1; }
     local path=./plugins/$1/plugin.sh
-    test -f "$path" || fatal "no such plugin ($path)"
+    test -f "$path" || { errmsg "no such plugin ($path)"; return 1; }
 }
 
 validate_name() {
