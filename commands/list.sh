@@ -16,10 +16,6 @@ print_backups_plugin_name() {
     local plugin=$1
     local name=$2
 
-    # TODO fragile
-    local backups_dir=$(get_backups_dir $plugin $name d)
-    test -d "${backups_dir%/*}" || { errmsg "no such configuration: $plugin $name"; return 1; }
-
     local period
     for period in $all_periods_iterable; do
         print_backups_plugin_name_period $plugin $name $period
@@ -50,6 +46,7 @@ cmd() {
         if test $# -gt 0; then
             name=$1; shift
             validate_name "$name"
+            validate_config_exists $plugin $name
 
             validate_no_more_args "$@"
 

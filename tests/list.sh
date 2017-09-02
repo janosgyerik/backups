@@ -29,4 +29,8 @@ matches "$BACKUPS_PATH/xoo/example2/weekly/xoo.$week.zip" list xoo example2
 matches "$BACKUPS_PATH/xoo/example1/daily/xoo.$day.zip
 $BACKUPS_PATH/xoo/example2/weekly/xoo.$week.zip" list xoo
 
+ok add xoo example3 w
+ok list xoo example3
+matches '' list xoo example3
+
 summary
