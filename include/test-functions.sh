@@ -5,7 +5,7 @@ assert_fail() {
     ((++tests_cnt))
     if "$@" &>/dev/null; then
         ((++failed_cnt))
-        echo got success, expected failure: $@
+        errmsg "ERROR: got success, expected failure: $@"
     fi
 }
 
@@ -13,7 +13,7 @@ assert_ok() {
     ((++tests_cnt))
     if ! "$@" >/dev/null; then
         ((++failed_cnt))
-        echo got failure, expected success: $@
+        errmsg "ERROR: got failure, expected success: $@"
     fi
 }
 
@@ -85,8 +85,6 @@ summary() {
     if test $failed_cnt = 0; then
         msg ok: all $tests_cnt tests passed
     else
-        local bold_red='\033[1;31m'
-        local reset='\033[0m'
-        msg $(printf "${bold_red}FAILED: $failed_cnt / $tests_cnt tests failed${reset}")
+        errmsg "FAILED: $failed_cnt / $tests_cnt tests failed"
     fi
 }
