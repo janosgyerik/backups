@@ -5,6 +5,11 @@ set -euo pipefail
 . ./include/functions.sh
 . ./include/test-functions.sh
 
+assert_fail validate_cmd
+assert_fail validate_cmd ''
+assert_fail validate_cmd nonexistent
+assert_ok validate_cmd config
+
 assert_fail validate_periods
 assert_fail validate_periods ''
 assert_fail validate_periods x

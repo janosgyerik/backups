@@ -17,10 +17,10 @@ fatal() {
 }
 
 validate_cmd() {
-    test ${1+x} || fatal 'argument missing; expected command name'
-    test "$1" || fatal 'invalid command: <empty>'
+    test ${1+x} || { errmsg 'argument missing; expected command name'; return 1; }
+    test "$1" || { errmsg 'invalid command: <empty>'; return 1; }
     local path=./commands/$1.sh
-    test -f "$path" || fatal "no such command ($path)"
+    test -f "$path" || { errmsg "no such command ($path)"; return 1; }
 }
 
 validate_plugin() {
