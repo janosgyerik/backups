@@ -6,7 +6,7 @@ msg() {
 }
 
 fatal() {
-    echo fatal: $* >&2
+    echo fatal: "$*" >&2
     exit 1
 }
 
