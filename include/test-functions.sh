@@ -69,6 +69,8 @@ summary() {
     if test $failed_cnt = 0; then
         msg ok: all $tests_cnt tests passed
     else
-        msg failed: $failed_cnt / $tests_cnt tests failed
+        local bold_red='\033[1;31m'
+        local reset='\033[0m'
+        msg $(printf "${bold_red}FAILED: $failed_cnt / $tests_cnt tests failed${reset}")
     fi
 }
