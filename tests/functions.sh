@@ -21,6 +21,14 @@ assert_fail validate_name 'a b'
 assert_fail validate_name 'a%b'
 assert_ok validate_name simple_name_1
 
+assert_ok validate_config_missing xoo config1
+assert_fail validate_config_exists xoo config1
+ok add xoo config1 d
+
+assert_fail validate_config_missing xoo config1
+assert_ok validate_config_exists xoo config1
+ok remove xoo config1
+
 assert_fail validate_periods
 assert_fail validate_periods ''
 assert_fail validate_periods x

@@ -36,14 +36,18 @@ validate_name() {
     [[ $1 =~ ^[a-zA-Z0-9_-]+$ ]] || { errmsg "invalid name: $1"; return 1; }
 }
 
-validate_config_nonexistent() {
-    local name path=$CONF/$1/$2.sh
-    test ! -e "$path" || fatal "configuration '$1 $2' already exists; expected not to"
+validate_config_missing() {
+    local plugin=$1; shift  # expect valid plugin that exists
+    local name=$1; shift    # expect valid name
+    local path=$CONF/$plugin/$name.sh
+    test ! -e "$path" || { errmsg "configuration '$plugin $name' already exists; expected not to"; return 1; }
 }
 
 validate_config_exists() {
-    local name path=$CONF/$1/$2.sh
-    test -f "$path" || fatal "configuration '$1 $2' does not exist; expected to exist"
+    local plugin=$1; shift  # expect valid plugin that exists
+    local name=$1; shift    # expect valid name
+    local path=$CONF/$plugin/$name.sh
+    test -f "$path" || { errmsg "configuration '$plugin $name' does not exist; expected to exist"; return 1; }
 }
 
 validate_periods() {

@@ -7,7 +7,7 @@ cmd() {
     validate_name "$@"
     local name=$1; shift
 
-    validate_config_nonexistent $plugin $name
+    validate_config_missing $plugin $name
 
     validate_periods "$@"
     local periods=$1; shift
