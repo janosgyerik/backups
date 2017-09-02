@@ -7,8 +7,9 @@ cmd() {
     validate_no_more_args "$@"
 
     case "$name" in
-        BACKUPS_PATH) echo $BACKUPS_PATH ;;
+        HOME) echo $HOME ;;
         CONF) echo $CONF ;;
+        BACKUPS_PATH) echo $BACKUPS_PATH ;;
         *) fatal invalid name: $name
     esac
 }
