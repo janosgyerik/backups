@@ -1,7 +1,7 @@
 # show system information (hidden command, for testing)
 
 cmd() {
-    test $# != 0 || { errmsg invalid name: empty; return 1; }
+    test $# != 0 || { errmsg 'invalid name: <empty>'; return 1; }
 
     local name=$1; shift
     validate_no_more_args "$@"

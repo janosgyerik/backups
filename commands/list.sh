@@ -16,12 +16,12 @@ print_backups_plugin_name_period() {
 print_backups_plugin_name() {
     local plugin=$1
     local name=$2
-    local period backups_dir
 
     # TODO fragile
-    backups_dir=$(get_backups_dir $plugin $name d)
+    local backups_dir=$(get_backups_dir $plugin $name d)
     test -d "${backups_dir%/*}" || { errmsg "no such configuration: $plugin $name"; return 1; }
 
+    local period
     for period in $all_periods_iterable; do
         print_backups_plugin_name_period $plugin $name $period
     done
@@ -29,8 +29,8 @@ print_backups_plugin_name() {
 
 print_backups_plugin() {
     local plugin=$1
-    local name
 
+    local name
     for name in $(get_configs $plugin); do
         print_backups_plugin_name $plugin $name
     done
@@ -38,7 +38,6 @@ print_backups_plugin() {
 
 print_backups() {
     local plugin
-
     for plugin in $(get_plugins); do
         print_backups_plugin $plugin
     done

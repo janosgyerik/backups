@@ -25,8 +25,9 @@ cmd() {
 
     validate_no_more_args "$@"
 
-    period=$(get_period $periodname)
+    local period=$(get_period $periodname)
 
+    local plugin config
     for plugin in $(get_plugins); do
         for config in $(get_configs $plugin); do
             load_config $plugin $config

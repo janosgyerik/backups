@@ -21,14 +21,11 @@ cmd() {
     validate_no_more_args "$@"
 
     local workdir=$WORK
-    local outfile
-    local basename ext
-    local label
-    local backups_dir
 
     load_plugin $plugin
     load_plugin_args $plugin $name
 
+    local i outfile basename ext label period backups_dir
     for ((i = 0; i < ${#active_periods}; i++)); do
         while IFS= read -r outfile; do
             basename=${outfile%.*}
