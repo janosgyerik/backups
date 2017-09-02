@@ -43,5 +43,5 @@ done
 if test $failed_cnt = 0; then
     msg self-tests ok: all $tests_cnt tests passed
 else
-    errmsg "FATAL: self-tests failed: $failed_cnt / $tests_cnt tests failed"
+    errmsg "FATAL: self-test suites failed: $failed_cnt / $tests_cnt test files failed"
 fi

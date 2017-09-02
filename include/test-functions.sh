@@ -5,7 +5,7 @@ assert_fail() {
     ((++tests_cnt))
     if "$@" &>/dev/null; then
         ((++failed_cnt))
-        errmsg "ERROR: got success, expected failure: $@"
+        errmsg "Failed: got success, expected failure: $@"
     fi
 }
 
@@ -13,7 +13,7 @@ assert_ok() {
     ((++tests_cnt))
     if ! "$@" >/dev/null; then
         ((++failed_cnt))
-        errmsg "ERROR: got failure, expected success: $@"
+        errmsg "Failed: got failure, expected success: $@"
     fi
 }
 
@@ -23,37 +23,29 @@ assert_equals() {
     ((++tests_cnt))
     if [ "$actual" != "$expected" ]; then
         ((++failed_cnt))
-        echo "got $actual != $expected"
+        errmsg "got $actual != $expected"
     fi
 }
 
-run_main() {
+testrun() {
     "$MAIN" "$@"
 }
 
 fail() {
-    ((++tests_cnt))
-    if run_main "$@" &>/dev/null; then
-        ((++failed_cnt))
-        echo got success, expected fail: $@
-    fi
+    assert_fail testrun "$@"
 }
 
 ok() {
-    ((++tests_cnt))
-    if ! run_main "$@" >/dev/null; then
-        ((++failed_cnt))
-        echo got failure, expected success: $@
-    fi
+    assert_ok testrun "$@"
 }
 
 matches() {
     ((++tests_cnt))
     local expected=$1; shift
-    local actual=$(run_main "$@")
+    local actual=$(testrun "$@")
     if [ "$expected" != "$actual" ]; then
         ((++failed_cnt))
-        echo "got '$actual', expected '$expected'"
+        errmsg "got '$actual', expected '$expected'"
     fi
 }
 
@@ -85,7 +77,7 @@ summary() {
     if test $failed_cnt = 0; then
         msg ok: all $tests_cnt tests passed
     else
-        errmsg "FAILED: $failed_cnt / $tests_cnt tests failed"
+        errmsg "Tests failed: $failed_cnt / $tests_cnt tests failed"
         return 1
     fi
 }
