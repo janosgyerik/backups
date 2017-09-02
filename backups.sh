@@ -27,13 +27,13 @@ usage() {
     echo
     echo Commands:
     echo
-    echo "  add PLUGIN NAME PERIODS [ARGS...]"
-    echo "  config [PLUGIN [NAME]]"
-    echo "  cron [daily|weekly|month|hourly]"
-    echo "  list [PLUGIN [NAME]]"
-    echo "  remove PLUGIN NAME"
-    echo "  run PLUGIN NAME [PERIODS]"
-    echo "  plugins"
+    echo "  plugins                               List available plugins"
+    echo "  add PLUGIN NAME PERIODS [ARGS...]     Add backup configuration"
+    echo "  config [PLUGIN [NAME]]                List backup configurations"
+    echo "  list [PLUGIN [NAME]]                  List backup files"
+    echo "  remove PLUGIN NAME                    Remove backup configuration"
+    echo "  run PLUGIN NAME [PERIODS]             Execute backup configurations"
+    echo "  cron [daily|weekly|month|hourly]      Execute backup configurations for period"
     echo
     exit 1
 }
