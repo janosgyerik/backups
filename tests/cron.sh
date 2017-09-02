@@ -5,6 +5,7 @@ set -euo pipefail
 . ./include/functions.sh
 . ./include/test-functions.sh
 
+fail cron
 fail cron x_nonexistent_period
 
 ok add xoo example1 d

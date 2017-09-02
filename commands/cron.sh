@@ -1,6 +1,7 @@
 # run configurations of specified period
 
 validate_periodname() {
+    test ${1+x} || { errmsg 'argument missing; expected period name'; return 1; }
     local name=$1
     case "$name" in
         daily|weekly|monthly|hourly) ;;
