@@ -1,7 +1,6 @@
 next
 ----
 
-- use consistent period names: abandon daily|weekly|monthly|hourly in cron
 - add plugin help, including description, triggered by -h appearing anywhere after plugin name; this is important, because it's not obvious what kind of parameters are required by mysql and paths plugins
 
 later

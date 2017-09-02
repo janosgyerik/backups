@@ -54,6 +54,15 @@ validate_config_exists() {
     test -f "$path" || { errmsg "configuration '$plugin $name' does not exist; expected to exist"; return 1; }
 }
 
+validate_period() {
+    test ${1+x} || { errmsg 'argument missing; expected period'; return 1; }
+    local period=$1; shift
+    case $period in
+        [dwmh]) ;;
+        *) errmsg invalid period: $period; return 1;
+    esac
+}
+
 validate_periods() {
     test ${1+x} || { errmsg 'argument missing; expected periods'; return 1; }
     test "$1" || { errmsg 'invalid periods: <empty>'; return 1; }

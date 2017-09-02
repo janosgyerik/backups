@@ -22,23 +22,19 @@ msg() {
 
 cat_default_crontab() {
     cat <<EOF
-0 * * * * $PWD/backups.sh cron hourly
-15 0 * * * $PWD/backups.sh cron daily
-20 1 7,14,21,28 * * $PWD/backups.sh cron weekly
-35 1 1 * * $PWD/backups.sh cron monthly
+0 * * * * $PWD/backups.sh cron h
+15 0 * * * $PWD/backups.sh cron d
+20 1 7,14,21,28 * * $PWD/backups.sh cron w
+35 1 1 * * $PWD/backups.sh cron m
 EOF
 }
 
 if test -f $crontab; then
-    msg "file $crontab exists, not overwriting"
+    msg "File $crontab exists, not overwriting"
 else
-    msg "creating $crontab with content:"
-    cat_default_crontab | tee $crontab | {
-        echo
-        sed -e 's/^/  /'
-        echo
-    }
+    msg "Creating $crontab ..."
+    cat_default_crontab > $crontab
 fi
 
-msg running installer ...
+msg Running installer ...
 $installer/crontab.sh

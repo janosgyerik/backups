@@ -13,4 +13,10 @@ set -euo pipefail
 
 cd "$(dirname "$0")"
 
-./crontab-installer/crontab.sh --remove
+installer=./crontab-installer
+$installer/crontab.sh --remove
+
+crontab=$installer/crontab.sh.crontab
+if test -f $crontab; then
+    mv -v $crontab $crontab.old
+fi

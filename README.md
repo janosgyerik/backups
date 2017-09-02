@@ -58,10 +58,10 @@ That is, for every file (for example a database dump), you get 23 backups:
 The default crontab is something like this:
 
     # UNIQUE LABEL
-    0 * * * * $PWD/backups.sh cron hourly
-    15 0 * * * $PWD/backups.sh cron daily
-    20 1 7,14,21,28 * * $PWD/backups.sh cron weekly
-    35 1 1 * * $PWD/backups.sh cron monthly
+    0 * * * * $PWD/backups.sh cron h
+    15 0 * * * $PWD/backups.sh cron d
+    20 1 7,14,21,28 * * $PWD/backups.sh cron w
+    35 1 1 * * $PWD/backups.sh cron m
 
 You can install the default crontab with `./install.sh`.
 To modify the timing edit the crontab directly with `crontab -e`.

@@ -9,27 +9,14 @@ validate_periodname() {
     esac
 }
 
-get_period() {
-    local shortname
-    case "$1" in
-        daily) shortname=d ;;
-        weekly) shortname=w ;;
-        monthly) shortname=m ;;
-        hourly) shortname=h ;;
-    esac
-    echo $shortname
-}
-
 cmd() {
-    validate_periodname "$@"
-    local periodname=$1; shift
+    validate_period "$@"
+    local period=$1; shift
 
     validate_no_more_args "$@"
 
-    local period=$(get_period $periodname)
-
     _log() {
-        log cron $periodname "$@"
+        log cron $period "$@"
     }
     _log start
 
