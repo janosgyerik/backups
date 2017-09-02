@@ -13,7 +13,6 @@ functionality
 - fix the fragilities of the list command, harden with more tests
 - add 'plugins' command so the interface is explorable
 - add -lh flags for list command
-- add tests for 'sysinfo' command
 - add logging for cron command
   - update the crontab to redirect cron command output to logs/daily.log
 - add proper tests with multiple arguments in xoo
