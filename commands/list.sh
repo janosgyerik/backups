@@ -20,7 +20,7 @@ print_backups_plugin_name() {
 
     # TODO fragile
     backups_dir=$(get_backups_dir $plugin $name d)
-    test -d "${backups_dir%/*}" || fatal "no such configuration: $plugin $name"
+    test -d "${backups_dir%/*}" || { errmsg "no such configuration: $plugin $name"; return 1; }
 
     for period in $all_periods_iterable; do
         print_backups_plugin_name_period $plugin $name $period
