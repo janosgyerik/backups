@@ -3,7 +3,7 @@ validate_args() {
     local name=$1; shift
 
     my_cnf_path=$(my_cnf_path $name)
-    test -f "$my_cnf_path" || fatal "Configuration file $my_cnf_path missing; create like this: $(print_sample_my_cnf)"
+    test -f "$my_cnf_path" || { errmsg "Configuration file $my_cnf_path missing; create like this: $(print_sample_my_cnf)"; return 1; }
 }
 
 my_cnf_path() {
