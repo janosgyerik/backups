@@ -4,7 +4,7 @@ validate_periodname() {
     local name=$1
     case "$name" in
         daily|weekly|monthly|hourly) ;;
-        *) fatal "invalid period name: '$name'"
+        *) errmsg "invalid period name: '$name'"; return 1;
     esac
 }
 
