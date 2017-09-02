@@ -4,7 +4,7 @@ cmd() {
     validate_plugin "$@"
     local plugin=$1; shift
 
-    validate_name $plugin "$@"
+    validate_name "$@"
     local name=$1; shift
 
     validate_config_exists $plugin $name
