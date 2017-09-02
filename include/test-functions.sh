@@ -86,5 +86,6 @@ summary() {
         msg ok: all $tests_cnt tests passed
     else
         errmsg "FAILED: $failed_cnt / $tests_cnt tests failed"
+        return 1
     fi
 }

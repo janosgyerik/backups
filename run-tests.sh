@@ -5,6 +5,7 @@ set -euo pipefail
 cd "$(dirname "$0")"
 
 . ./include/functions.sh
+. ./include/test-functions.sh
 
 cleanup() {
     test -d "$work" && rm -fr "$work"
@@ -32,6 +33,8 @@ for testscript; do
     mkdir -p "$HOME" "$BACKUPS_PATH" "$CONF"
 
     msg running tests: $testscript ...
-    $testscript
+    assert_ok $testscript
     cleanup
 done
+
+summary
