@@ -5,6 +5,11 @@ msg() {
     echo "* $@"
 }
 
+error() {
+    echo error: "$*" >&2
+    return 1
+}
+
 fatal() {
     echo fatal: "$*" >&2
     exit 1
@@ -41,14 +46,17 @@ validate_config_exists() {
 }
 
 validate_periods() {
-    test ${1+x} || fatal 'argument missing; expected periods'
-    test "$1" || fatal 'invalid periods: empty'
+    test ${1+x} || { error 'argument missing; expected periods'; return 1; }
+    test "$1" || { error invalid periods: empty; return 1; }
+    local d=0 w=0 m=0 h=0
     for ((i = 0; i < ${#1}; ++i)); do
         local period=${1:i:1}
         case $period in
-            # TODO don't allow same period twice
-            [dwmh]) ;;
-            *) fatal "invalid period: $period"
+            d) test $d = 0 && d=1 || { error duplicate period: $period; return 1; } ;;
+            w) test $w = 0 && w=1 || { error duplicate period: $period; return 1; } ;;
+            m) test $m = 0 && m=1 || { error duplicate period: $period; return 1; } ;;
+            h) test $h = 0 && h=1 || { error duplicate period: $period; return 1; } ;;
+            *) error invalid period: $period
         esac
     done
 }

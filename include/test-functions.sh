@@ -1,6 +1,22 @@
 tests_cnt=0
 failed_cnt=0
 
+assert_fail() {
+    ((++tests_cnt))
+    if "$@" &>/dev/null; then
+        ((++failed_cnt))
+        echo got success, expected failure: $@
+    fi
+}
+
+assert_ok() {
+    ((++tests_cnt))
+    if ! "$@" >/dev/null; then
+        ((++failed_cnt))
+        echo got failure, expected success: $@
+    fi
+}
+
 assert_equals() {
     local expected=$1; shift
     local actual=$1; shift

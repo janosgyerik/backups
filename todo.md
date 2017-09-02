@@ -1,19 +1,16 @@
 first release
 -------------
 
-- make failure in summary red color to stand out
 - make the cron command print what it is doing: date, args, config
 - rename files plugin to paths, and make it tgz instead of copy
 - manual test all supported plugins
-- drop the TODO from the README, and make sure it all works as advertised
-- make failure in summary red color to stand out
 
 functionality
 -------------
 
-- complete all TODO
 - add plugin help, triggered by -h appearing anywhere after plugin name; this is important, because it's not obvious what kind of parameters are required by mysql and files plugins
 - fix the fragilities of the cron command, harden with more tests
+- fix the fragilities of the list command, harden with more tests
 - add 'plugins' command so the interface is explorable
 - add -lh flags for list command
 - add tests for 'sysinfo' command
