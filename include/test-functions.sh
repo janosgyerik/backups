@@ -66,7 +66,7 @@ backups_exist() {
     for ((i = 0; i < ${#periods}; i++)); do
         period=${periods:i:1}
         backups_dir=$(get_backups_dir $plugin $name $period)
-        is_non_empty_dir "$backups_dir" || fatal "expected backups in $backups_dir"
+        is_non_empty_dir "$backups_dir" || { errmsg "expected backups in $backups_dir"; return 1; }
     done
 }
 
