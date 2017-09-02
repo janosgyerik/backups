@@ -2,13 +2,12 @@ first release
 -------------
 
 - make the cron command print what it is doing: date, args, config
-- rename files plugin to paths, and make it tgz instead of copy
 - manual test all supported plugins
 
 functionality
 -------------
 
-- add plugin help, triggered by -h appearing anywhere after plugin name; this is important, because it's not obvious what kind of parameters are required by mysql and files plugins
+- add plugin help, including description, triggered by -h appearing anywhere after plugin name; this is important, because it's not obvious what kind of parameters are required by mysql and paths plugins
 - fix the fragilities of the cron command, harden with more tests
 - fix the fragilities of the list command, harden with more tests
 - add 'plugins' command so the interface is explorable
