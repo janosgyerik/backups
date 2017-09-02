@@ -1,5 +1,5 @@
-Simple module backup manager
-----------------------------
+Simple modular backup manager
+-----------------------------
 
 TODO: this document is a work in progress, not everything works yet as advertised
 

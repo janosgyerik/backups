@@ -19,7 +19,7 @@ usage() {
     test $# = 0 || echo "$@"
     echo "Usage: $0 COMMAND [COMMAND-ARGS...]"
     echo
-    echo A simple modular backup manager
+    echo Simple modular backup manager
     echo
     echo Options:
     echo
