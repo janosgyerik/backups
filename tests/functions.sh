@@ -50,4 +50,10 @@ assert_ok validate_no_more_args
 assert_fail validate_no_more_args ''
 assert_fail validate_no_more_args x
 
+assert_ok require_arguments 0
+assert_fail require_arguments 1
+assert_ok require_arguments 1 ''
+assert_fail require_arguments 2 a
+assert_ok require_arguments 2 a b
+
 summary

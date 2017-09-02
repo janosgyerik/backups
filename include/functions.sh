@@ -71,8 +71,8 @@ validate_no_more_args() {
 }
 
 require_arguments() {
-    local count=$1; shift
-    test $# -ge $count || fatal "got $# arguments; expected $count"
+    local count=$1; shift  # expect valid count
+    test $# -ge $count || { errmsg "got $# arguments; expected $count"; return 1; }
 }
 
 clear_config() {
