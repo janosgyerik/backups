@@ -1,9 +1,47 @@
 Simple modular backup manager
 -----------------------------
 
-TODO: this document is a work in progress, not everything works yet as advertised
+Create rolling periodic full backups of MySQL databases, paths and more.
 
-Create rolling periodic full backups of MySQL databases, files and more.
+Main features:
+
+- Create full backups of MySQL databases or filesystem paths
+- Run backups periodically, executed by cron, daily, weekly, monthly
+- Rotate backups
+- Manage backups: add and list configurations, list backup files
+
+Quick guide
+-----------
+
+Install the cron jobs that will execute the backup configurations:
+
+    ./install.sh
+
+To create and manage the backup configurations, use the `./backups.sh` command.
+Run it without arguments or with `-h` or `--help` to get basic usage help:
+
+    ./backup.sh
+    ./backup.sh -h
+    ./backup.sh --help
+
+To dive right in, jump to the **Examples** section.
+
+To understand the concepts and how it works, continue reading the **Detailed guide**.
+
+Detailed guide
+--------------
+
+A backup configuration consists of the following parameters:
+
+- `plugin`: the plugin to use to generate backup files, for example `mysql`, `paths`
+- `name`: a simple label to use to identify the configuration
+- `periods`: the backup periods, for example daily, weekly, monthly
+- any additional arguments required by the given plugin, for example:
+  - the `mysql` plugin doesn't require any additional arguments
+  - the `paths` plugin requires a list of paths
+
+Note that all the backup configurations of a given period run all at once.
+For example all the daily backup configurations run at the same time.
 
 Backups are scheduled using cron jobs:
 
@@ -17,8 +55,7 @@ That is, for every file (for example a database dump), you get 23 backups:
 - 4 rotating weekly backups (last 4 weeks)
 - 12 rotating yearly backups (last 12 months)
 
-The timing and frequency of the backups is easy to customize by editing the crontab that the script installs.
-The default cron configuration is something like this:
+The default crontab is something like this:
 
     # UNIQUE LABEL
     0 * * * * $PWD/backups.sh cron hourly
@@ -26,7 +63,10 @@ The default cron configuration is something like this:
     20 1 7,14,21,28 * * $PWD/backups.sh cron weekly
     35 1 1 * * $PWD/backups.sh cron monthly
 
-Each cron job executes all the backup configurations that are relevant for the given period. A backup configuration may use any combination of periods. However, all configurations for a given period are triggered at the same time, and run sequentially.
+You can install the default crontab with `./install.sh`.
+To modify the timing edit the crontab directly with `crontab -e`.
+
+Each cron job executes all the backup configurations that are relevant for the given period. A backup configuration may use any combination of periods. However, all configurations for a given period are triggered at the same time, and executed sequentially.
 
 The backup configurations are managed by the `./backup.sh` script,
 and should not be edited by hand.
@@ -35,21 +75,11 @@ Backup logic is implemented as plugins, so that new kind of backups can be added
 
 Currently supported plugins:
 
-- mysql: backup mysql databases by running mysqldump and zipping the output
-- files: backup groups of files by simply copying
+- mysql: backup mysql databases by running mysqldump and gzip the output
+- paths: backup groups of files and directories as a gzip
 
 Examples
 --------
-
-Install the cron jobs:
-
-    ./install.sh
-
-Get basic usage help:
-
-    ./backup.sh
-    ./backup.sh -h
-    ./backup.sh --help
 
 Schedule daily and weekly backup of the 'bashoneliners' MySQL database:
 
