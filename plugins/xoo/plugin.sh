@@ -2,7 +2,7 @@ validate_args() {
     require_arguments 1 "$@"
     local name=$1; shift
 
-    test $# = 0 || fatal "excess arguments: $@"
+    test $# = 0 || { errmsg "excess arguments: $@"; return 1; }
 }
 
 run() {
