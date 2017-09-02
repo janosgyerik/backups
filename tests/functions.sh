@@ -46,4 +46,8 @@ assert_fail validate_periods dwmhd
 assert_fail validate_periods ddw
 assert_fail validate_periods xd
 
+assert_ok validate_no_more_args
+assert_fail validate_no_more_args ''
+assert_fail validate_no_more_args x
+
 summary

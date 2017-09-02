@@ -67,7 +67,7 @@ validate_periods() {
 }
 
 validate_no_more_args() {
-    test $# = 0 || fatal "excess arguments: $@"
+    test $# = 0 || { errmsg "excess arguments: $@"; return 1; }
 }
 
 require_arguments() {
