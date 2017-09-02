@@ -60,6 +60,10 @@ work=$(mktemp -d)
 MAIN=$PWD/backups.sh
 WORK=$work
 
+if test "${HOME_OVERRIDE+x}"; then
+    HOME=$HOME_OVERRIDE
+fi
+
 if test "${CONF_OVERRIDE+x}"; then
     CONF=$CONF_OVERRIDE
 else
@@ -71,8 +75,6 @@ if test "${BACKUPS_PATH_OVERRIDE+x}"; then
 elif test ! "${BACKUPS_PATH+x}"; then
     BACKUPS_PATH=$HOME/backups
 fi
-
-BACKUPS=$BACKUPS_PATH
 
 . ./commands/$cmd.sh
 cmd "$@"

@@ -150,7 +150,7 @@ get_backups_dir() {
         *) fatal "Unknown period: $period"
     esac
 
-    echo $BACKUPS/$plugin/$name/$period_dir
+    echo $BACKUPS_PATH/$plugin/$name/$period_dir
 }
 
 get_plugins() {

@@ -17,18 +17,19 @@ trap 'cleanup; exit' 0 1 2 3 15
 test $# -gt 0 || set -- tests/* plugins/*/tests.sh
 
 export MAIN=$PWD/backups.sh
-unset BACKUPS_PATH
+unset HOME BACKUPS_PATH
 
 for testscript; do
     test -f "$testscript" || continue
 
     work=$(mktemp -d)
+    export HOME=$work/home
+    export HOME_OVERRIDE=$HOME
+    export BACKUPS_PATH=$work/backups
+    export BACKUPS_PATH_OVERRIDE=$BACKUPS_PATH
     export CONF=$work/conf
-    export BACKUPS=$work/backups
-    mkdir -p "$CONF" "$BACKUPS"
-
     export CONF_OVERRIDE=$CONF
-    export BACKUPS_PATH_OVERRIDE=$BACKUPS
+    mkdir -p "$HOME" "$BACKUPS_PATH" "$CONF"
 
     msg running tests: $testscript ...
     $testscript
