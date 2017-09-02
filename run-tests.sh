@@ -5,7 +5,6 @@ set -euo pipefail
 cd "$(dirname "$0")"
 
 . ./include/functions.sh
-. ./include/test-functions.sh
 
 cleanup() {
     test -d "$work" && rm -fr "$work"
@@ -20,6 +19,9 @@ test $# -gt 0 || set -- tests/* plugins/*/tests.sh
 export MAIN=$PWD/backups.sh
 unset HOME BACKUPS_PATH
 
+tests_cnt=0
+failed_cnt=0
+
 for testscript; do
     test -f "$testscript" || continue
 
@@ -33,8 +35,13 @@ for testscript; do
     mkdir -p "$HOME" "$BACKUPS_PATH" "$CONF"
 
     msg running tests: $testscript ...
-    assert_ok $testscript
+    ((++tests_cnt))
+    $testscript || ((++failed_cnt))
     cleanup
 done
 
-summary
+if test $failed_cnt = 0; then
+    msg self-tests ok: all $tests_cnt tests passed
+else
+    errmsg "self-tests FAILED: $failed_cnt / $tests_cnt tests failed"
+fi
