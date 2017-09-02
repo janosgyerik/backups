@@ -35,6 +35,9 @@ usage() {
     echo "  run PLUGIN NAME [PERIODS]             Execute backup configurations"
     echo "  cron [daily|weekly|month|hourly]      Execute backup configurations for period"
     echo
+    echo "Valid PERIODS are d w m h, for daily, weekly, monthly, hourly, respectively,"
+    echo "and multiple values are allowed, for example dwmh for all periods"
+    echo
     exit 1
 }
 
