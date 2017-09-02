@@ -10,7 +10,6 @@ functionality
 - add plugin help, including description, triggered by -h appearing anywhere after plugin name; this is important, because it's not obvious what kind of parameters are required by mysql and paths plugins
 - fix the fragilities of the cron command, harden with more tests
 - fix the fragilities of the list command, harden with more tests
-- add 'plugins' command so the interface is explorable
 - add -lh flags for list command
 - add logging for cron command
   - update the crontab to redirect cron command output to logs/daily.log

@@ -33,6 +33,7 @@ usage() {
     echo "  list [PLUGIN [NAME]]"
     echo "  remove PLUGIN NAME"
     echo "  run PLUGIN NAME [PERIODS]"
+    echo "  plugins"
     echo
     exit 1
 }

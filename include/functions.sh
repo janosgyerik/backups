@@ -167,7 +167,10 @@ get_backups_dir() {
 }
 
 get_plugins() {
-    ls -d plugins/*/ | cut -f2 -d/
+    local dir name
+    for dir in plugins/*/; do
+        basename "$dir"
+    done
 }
 
 get_configs() {
