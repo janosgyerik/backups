@@ -31,9 +31,9 @@ validate_plugin() {
 }
 
 validate_name() {
-    test ${1+x} || fatal 'argument missing; expected name'
-    test "$1" || fatal 'invalid name: <empty>'
-    [[ $1 =~ ^[a-zA-Z0-9_-]+$ ]] || fatal "invalid name: $1"
+    test ${1+x} || { errmsg 'argument missing; expected name'; return 1; }
+    test "$1" || { errmsg 'invalid name: <empty>'; return 1; }
+    [[ $1 =~ ^[a-zA-Z0-9_-]+$ ]] || { errmsg "invalid name: $1"; return 1; }
 }
 
 validate_config_nonexistent() {

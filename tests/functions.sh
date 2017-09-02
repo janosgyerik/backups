@@ -15,6 +15,12 @@ assert_fail validate_plugin ''
 assert_fail validate_plugin nonexistent
 assert_ok validate_plugin xoo
 
+assert_fail validate_name
+assert_fail validate_name ''
+assert_fail validate_name 'a b'
+assert_fail validate_name 'a%b'
+assert_ok validate_name simple_name_1
+
 assert_fail validate_periods
 assert_fail validate_periods ''
 assert_fail validate_periods x
