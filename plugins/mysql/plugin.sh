@@ -24,6 +24,11 @@ database=DBNAME
 EOF
 }
 
+echo_and_run() {
+    echo "$*" >&2
+    "$@"
+}
+
 run() {
     # output: relative paths of files to backup
     local plugin=$1; shift
@@ -33,6 +38,6 @@ run() {
     validate_args $name "$@"
 
     target=$workdir/$name.gz
-    mysqldump --defaults-file=$(my_cnf_path $name) $name | gzip -c >"$target"
+    echo_and_run mysqldump --defaults-file=$(my_cnf_path $name) $name | gzip -c >"$target"
     echo "$name.gz"
 }
