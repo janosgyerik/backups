@@ -28,6 +28,7 @@ cmd() {
     local i outfile basename ext label period backups_dir
     for ((i = 0; i < ${#active_periods}; i++)); do
         outfile=$(run $plugin $name "$workdir" "${ARGS[@]:-}")
+        test -f "$workdir/$outfile" || continue
         basename=${outfile%.*}
         basename=${basename##*/}
         ext=${outfile##*.}
