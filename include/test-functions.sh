@@ -28,7 +28,7 @@ assert_equals() {
 }
 
 testrun() {
-    "$MAIN" "$@"
+    "$MAIN" "$@" | sort
 }
 
 fail() {
