@@ -26,13 +26,14 @@ for testscript; do
     test -f "$testscript" || continue
 
     work=$(mktemp -d)
+    export TMP=$work/tmp
     export HOME=$work/home
     export HOME_OVERRIDE=$HOME
     export BACKUPS_PATH=$work/backups
     export BACKUPS_PATH_OVERRIDE=$BACKUPS_PATH
     export CONF=$work/conf
     export CONF_OVERRIDE=$CONF
-    mkdir -p "$HOME" "$BACKUPS_PATH" "$CONF"
+    mkdir -p "$HOME" "$BACKUPS_PATH" "$CONF" "$TMP"
 
     msg running tests: $testscript ...
     ((++tests_cnt))

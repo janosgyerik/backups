@@ -39,6 +39,7 @@ A backup configuration consists of the following parameters:
 - any additional arguments required by the given plugin, for example:
   - the `mysql` plugin doesn't require any additional arguments
   - the `paths` plugin requires a list of paths
+  - the `git` plugin requires a path to a Git work tree
 
 Note that all the backup configurations of a given period run all at once.
 For example all the daily backup configurations run at the same time.
@@ -77,6 +78,7 @@ Currently supported plugins:
 
 - mysql: backup mysql databases by running mysqldump and gzip the output
 - paths: backup groups of files and directories as a gzip
+- git: perform a `git add -A` and `git commit`
 
 Examples
 --------
