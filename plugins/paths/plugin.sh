@@ -14,6 +14,10 @@ run() {
     validate_args $name "$@"
 
     local filename=$name.tgz
-    tar zcf "$workdir/$filename" "$@" &>/dev/null
+    local out
+    if ! out=$(tar zcf "$workdir/$filename" "$@" 2>&1); then
+        echo "$out" >&2
+        exit 1
+    fi
     echo "$filename"
 }
