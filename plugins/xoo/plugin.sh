@@ -6,7 +6,7 @@ validate_args() {
 }
 
 run() {
-    # output: path to backup file
+    # output: relative path from $workdir of a single file to backup
     local plugin=$1; shift
     local name=$1; shift
     local workdir=$1; shift
