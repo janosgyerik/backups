@@ -7,7 +7,7 @@ cd "$(dirname "$0")"
 . ./include/functions.sh
 
 cleanup() {
-    test -d "$work" && rm -fr "$work"
+    test "${work+x}" && test -d "$work" && rm -fr "$work"
 }
 
 trap 'cleanup; exit' 0 1 2 3 15
