@@ -159,7 +159,11 @@ print_config() {
     local name=$2
     load_config $plugin $name
     load_plugin_args $plugin $name
-    echo $plugin $name $periods "${ARGS[@]}"
+    if test "${ARGS[*]+x}"; then
+        echo $plugin $name $periods "${ARGS[*]}"
+    else
+        echo $plugin $name $periods
+    fi
 }
 
 get_backups_dir() {
