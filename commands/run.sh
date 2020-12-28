@@ -27,25 +27,24 @@ cmd() {
 
     local i outfile basename ext label period backups_dir
     for ((i = 0; i < ${#active_periods}; i++)); do
-        while IFS= read -r outfile; do
-            basename=${outfile%.*}
-            basename=${basename##*/}
-            ext=${outfile##*.}
-            test "$ext" || ext=bak
+        outfile=$(run $plugin $name "$workdir" "${ARGS[@]:-}")
+        basename=${outfile%.*}
+        basename=${basename##*/}
+        ext=${outfile##*.}
+        test "$ext" || ext=bak
 
-            period=${active_periods:i:1}
-            case $period in
-                d) label=$(date +%a) ;;
-                w) label=$(date +%d) ;;
-                m) label=$(date +%b) ;;
-                h) label=$(date +%H) ;;
-                *) fatal "Unknown period: $period"
-            esac
+        period=${active_periods:i:1}
+        case $period in
+            d) label=$(date +%a) ;;
+            w) label=$(date +%d) ;;
+            m) label=$(date +%b) ;;
+            h) label=$(date +%H) ;;
+            *) fatal "Unknown period: $period"
+        esac
 
-            backups_dir=$(get_backups_dir $plugin $name $period)
-            mkdir -p "$backups_dir"
+        backups_dir=$(get_backups_dir $plugin $name $period)
+        mkdir -p "$backups_dir"
 
-            mv "$workdir/$outfile" "$backups_dir/$basename.$label.$ext"
-        done < <(run $plugin $name "$workdir" "${ARGS[@]}")
+        mv "$workdir/$outfile" "$backups_dir/$basename.$label.$ext"
     done
 }
