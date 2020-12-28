@@ -23,6 +23,7 @@ cmd() {
         if test $# -gt 0; then
             name=$1; shift
             validate_name "$name"
+            validate_config_exists "$plugin" "$name"
 
             validate_no_more_args "$@"
         else
