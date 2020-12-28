@@ -20,9 +20,9 @@ Install the cron jobs that will execute the backup configurations:
 To create and manage the backup configurations, use the `./backups.sh` command.
 Run it without arguments or with `-h` or `--help` to get basic usage help:
 
-    ./backup.sh
-    ./backup.sh -h
-    ./backup.sh --help
+    ./backups.sh
+    ./backups.sh -h
+    ./backups.sh --help
 
 To dive right in, jump to the **Examples** section.
 
@@ -68,7 +68,7 @@ To modify the timing edit the crontab directly with `crontab -e`.
 
 Each cron job executes all the backup configurations that are relevant for the given period. A backup configuration may use any combination of periods. However, all configurations for a given period are triggered at the same time, and executed sequentially.
 
-The backup configurations are managed by the `./backup.sh` script,
+The backup configurations are managed by the `./backups.sh` script,
 and should not be edited by hand.
 
 Backup logic is implemented as plugins, so that new kind of backups can be added easily and independently from the rest of the logic, such as the rotating backup mechanism or configuration.
