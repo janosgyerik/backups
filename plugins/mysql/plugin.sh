@@ -35,10 +35,10 @@ run() {
     local name=$1; shift
     local workdir=$1; shift
 
-    validate_args $name "$@"
+    validate_args "$name" "$@"
 
     target=$workdir/$name.gz
-    echo_and_run mysqldump --defaults-file=$(my_cnf_path $name) $name | gzip -c >"$target"
+    echo_and_run mysqldump --defaults-file="$(my_cnf_path "$name")" --no-tablespaces "$name" | gzip -c >"$target"
     exit_code=$?
     echo "$name.gz"
     return "$exit_code"
