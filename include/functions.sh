@@ -66,7 +66,7 @@ validate_period() {
 validate_periods() {
     test ${1+x} || { errmsg 'argument missing; expected periods'; return 1; }
     test "$1" || { errmsg 'invalid periods: <empty>'; return 1; }
-    local d=0 w=0 m=0 h=0
+    local d=0 w=0 m=0 h=0 s=0
     for ((i = 0; i < ${#1}; ++i)); do
         local period=${1:i:1}
         case $period in
@@ -74,6 +74,7 @@ validate_periods() {
             w) test $w = 0 && w=1 || { errmsg duplicate period: $period; return 1; } ;;
             m) test $m = 0 && m=1 || { errmsg duplicate period: $period; return 1; } ;;
             h) test $h = 0 && h=1 || { errmsg duplicate period: $period; return 1; } ;;
+            s) test $s = 0 && s=1 || { errmsg duplicate period: $period; return 1; } ;;
             *) errmsg invalid period: $period; return 1;
         esac
     done
@@ -177,6 +178,7 @@ get_backups_dir() {
         w) period_dir=weekly ;;
         m) period_dir=monthly ;;
         h) period_dir=hourly ;;
+        s) period_dir=. ;;
         *) fatal "Unknown period: $period"
     esac
 

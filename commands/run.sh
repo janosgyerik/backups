@@ -40,6 +40,7 @@ cmd() {
             w) label=$(date +%d) ;;
             m) label=$(date +%b) ;;
             h) label=$(date +%H) ;;
+            s) label=snapshot ;;
             *) fatal "Unknown period: $period"
         esac
 
