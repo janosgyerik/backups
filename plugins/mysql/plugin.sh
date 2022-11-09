@@ -39,5 +39,7 @@ run() {
 
     target=$workdir/$name.gz
     echo_and_run mysqldump --defaults-file=$(my_cnf_path $name) $name | gzip -c >"$target"
+    exit_code=$?
     echo "$name.gz"
+    return "$exit_code"
 }
