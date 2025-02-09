@@ -5,7 +5,8 @@ set -euo pipefail
 . ./include/functions.sh
 . ./include/test-functions.sh
 
-matches "mysql
+matches "git
+mysql
 paths" plugins
 
 summary
