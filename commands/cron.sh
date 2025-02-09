@@ -17,7 +17,7 @@ cmd() {
             load_config $plugin $config
             if [[ $periods == *$period* ]]; then
                 _log $plugin $config start
-                $MAIN run $plugin $config
+                $MAIN run $plugin $config $period
                 _log $plugin $config end
             fi
         done
